@@ -1,8 +1,8 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { ContentMutationSagaCommand } from '../interface';
+import { ContentMutationUseCaseCommand } from '../interface';
 
 export class SyncTreeCommand {
-  constructor(public command: ContentMutationSagaCommand) {}
+  constructor(public command: ContentMutationUseCaseCommand) {}
 }
 
 @CommandHandler(SyncTreeCommand)

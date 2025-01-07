@@ -1,12 +1,12 @@
 import { CommandBus } from '@nestjs/cqrs';
 import {
-  CmsSagaActions,
-  ContentMutationSagaCommand,
-  SagaCommandData,
+  CmsUseCaseActions,
+  ContentMutationUseCaseCommand,
+  UseCaseCommandData,
 } from '../interface';
 import { EntityManager } from '../../../utils/stubs/entity-manager';
 
-export function CmsSaga(handlers: CmsSagaActions) {
+export function CmsUseCase(handlers: CmsUseCaseActions) {
   return function (
     target: any,
     propertyKey: string,
@@ -14,7 +14,7 @@ export function CmsSaga(handlers: CmsSagaActions) {
   ): void {
     descriptor.value = async function (
       this: any,
-      commandData: SagaCommandData,
+      commandData: UseCaseCommandData,
     ) {
       const commandBus = this.commandBus as CommandBus;
       const commandHandlers = handlers.commands;
@@ -22,7 +22,7 @@ export function CmsSaga(handlers: CmsSagaActions) {
 
       const result = await commandData.em.transactional(
         async (tem: EntityManager) => {
-          const command = new ContentMutationSagaCommand(
+          const command = new ContentMutationUseCaseCommand(
             commandData.dto,
             tem,
             context,
@@ -34,10 +34,10 @@ export function CmsSaga(handlers: CmsSagaActions) {
 
           context[firstHandler.name] = result;
 
-          commandHandlers.shift();
+          for (const [index, handler] of commandHandlers.entries()) {
+            if (index === 0) continue;
 
-          for (const handler of commandHandlers) {
-            const nextCommand = new ContentMutationSagaCommand(
+            const nextCommand = new ContentMutationUseCaseCommand(
               result,
               tem,
               context,

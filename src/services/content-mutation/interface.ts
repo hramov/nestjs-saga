@@ -1,6 +1,6 @@
 import { EntityManager } from '../../utils/stubs/entity-manager';
 
-export class ContentMutationSagaCommand<T = any> {
+export class ContentMutationUseCaseCommand<T = any> {
   constructor(
     private readonly dto: T,
     private readonly em: EntityManager,
@@ -28,16 +28,16 @@ export class ContentMutationSagaCommand<T = any> {
   }
 }
 
-export interface CmsSagaActions {
-  commands: SagaCommandConstructor[];
-  events: SagaCommandConstructor[];
+export interface CmsUseCaseActions {
+  commands: UseCaseCommandConstructor[];
+  events: UseCaseCommandConstructor[];
 }
 
-export type SagaCommandConstructor<T = any> = new (
-  command: ContentMutationSagaCommand<T>,
+export type UseCaseCommandConstructor<T = any> = new (
+  command: ContentMutationUseCaseCommand<T>,
 ) => T;
 
-export interface SagaCommandData<T = any> {
+export interface UseCaseCommandData<T = any> {
   dto: T;
   em: EntityManager;
 }

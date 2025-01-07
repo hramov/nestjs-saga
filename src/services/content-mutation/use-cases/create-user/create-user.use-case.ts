@@ -1,22 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { SagaCommandData } from '../../interface';
+import { UseCaseCommandData } from '../../interface';
 import { SyncTreeCommand } from '../../commands/sync-tree';
 import { CreateUserCommand } from '../../commands/create-user';
-import { CmsSaga } from '../../decorators/cms-saga.decorator';
+import { CmsUseCase } from '../../decorators/cms-use-case.decorator';
 
-const CreateUserSagaActions = {
+const CreateUserCmsUseCaseActions = {
   commands: [CreateUserCommand, SyncTreeCommand],
   events: [],
 };
 
 @Injectable()
-export class CreateUserSaga {
+export class CreateUser {
   constructor(private readonly commandBus: CommandBus) {}
 
-  @CmsSaga(CreateUserSagaActions)
+  @CmsUseCase(CreateUserCmsUseCaseActions)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async execute<T>(commandData: SagaCommandData): Promise<T> {
+  async execute<T>(commandData: UseCaseCommandData): Promise<T> {
     return;
   }
 }

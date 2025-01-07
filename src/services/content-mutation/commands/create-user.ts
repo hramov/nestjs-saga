@@ -1,8 +1,10 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { ContentMutationSagaCommand } from '../interface';
+import { ContentMutationUseCaseCommand } from '../interface';
 
 export class CreateUserCommand {
-  constructor(public command: ContentMutationSagaCommand<CreateUserCommand>) {}
+  constructor(
+    public command: ContentMutationUseCaseCommand<CreateUserCommand>,
+  ) {}
 }
 
 @CommandHandler(CreateUserCommand)
