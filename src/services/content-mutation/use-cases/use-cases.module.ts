@@ -3,10 +3,10 @@ import { CreateUser } from './create-user/create-user.use-case';
 import { CqrsModule } from '@nestjs/cqrs';
 import { CommandHandlers } from '../commands';
 
-const Actions = [CreateUser];
+const UseCases = [CreateUser];
 @Module({
   imports: [CqrsModule],
-  providers: [...Actions, ...CommandHandlers],
-  exports: [...Actions, ...CommandHandlers],
+  providers: [...UseCases, ...CommandHandlers],
+  exports: [...UseCases, ...CommandHandlers],
 })
 export class UseCasesModule {}

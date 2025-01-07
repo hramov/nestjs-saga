@@ -4,9 +4,10 @@ import { UseCaseCommandData } from '../../interface';
 import { SyncTreeCommand } from '../../commands/sync-tree';
 import { CreateUserCommand } from '../../commands/create-user';
 import { CmsUseCase } from '../../decorators/cms-use-case.decorator';
+import { AuditCommand } from '../../commands/audit';
 
 const CreateUserCmsUseCaseActions = {
-  commands: [CreateUserCommand, SyncTreeCommand],
+  commands: [CreateUserCommand, SyncTreeCommand, AuditCommand],
   events: [],
 };
 
