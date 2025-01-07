@@ -1,10 +1,10 @@
 import { CommandBus } from '@nestjs/cqrs';
 import {
-  ContentMutationSagaCommand,
   CmsSagaActions,
+  ContentMutationSagaCommand,
   SagaCommandData,
 } from '../interface';
-import { EntityManager } from '../../stubs/entity-manager';
+import { EntityManager } from '../../../utils/stubs/entity-manager';
 
 export function CmsSaga(handlers: CmsSagaActions) {
   return function (
@@ -32,9 +32,7 @@ export function CmsSaga(handlers: CmsSagaActions) {
 
           const result = await commandBus.execute(new firstHandler(command));
 
-          console.log(result);
-
-          context[firstHandler.constructor.name] = result;
+          context[firstHandler.name] = result;
 
           commandHandlers.shift();
 
@@ -49,7 +47,7 @@ export function CmsSaga(handlers: CmsSagaActions) {
               new handler(nextCommand),
             );
 
-            context[handler.constructor.name] = nextResult;
+            context[handler.name] = nextResult;
           }
 
           return result;

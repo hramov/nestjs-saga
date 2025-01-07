@@ -3,8 +3,8 @@ import { ContentMutationController } from './content-mutation.controller';
 import { ContentMutationService } from './content-mutation.service';
 import { CqrsModule } from '@nestjs/cqrs';
 import { SagasModule } from './sagas/sagas.module';
-import { CmsMetadataModule } from './cms-metadata/cms-metadata.module';
-import { EntityManager } from './stubs/entity-manager';
+import { CmsMetadataModule } from '../../utils/cms-metadata/cms-metadata.module';
+import { EntityManager } from '../../utils/stubs/entity-manager';
 
 @Module({
   controllers: [ContentMutationController],

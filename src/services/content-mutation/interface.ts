@@ -1,4 +1,4 @@
-import { EntityManager } from '../stubs/entity-manager';
+import { EntityManager } from '../../utils/stubs/entity-manager';
 
 export class ContentMutationSagaCommand<T = any> {
   constructor(
@@ -6,6 +6,10 @@ export class ContentMutationSagaCommand<T = any> {
     private readonly em: EntityManager,
     private readonly context?: Record<string, any>,
   ) {}
+
+  getCommandData() {
+    return this.dto;
+  }
 
   getFieldValue(field: keyof T): T[keyof T] {
     return this.dto[field];
@@ -17,6 +21,10 @@ export class ContentMutationSagaCommand<T = any> {
 
   getContext(): Record<string, any> {
     return this.context;
+  }
+
+  getFinishedSteps() {
+    return this.context ? Object.keys(this.context) : [];
   }
 }
 

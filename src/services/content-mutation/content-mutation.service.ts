@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateObjectDto } from './dto/create-user.dto';
-import { CreateUserSaga } from './sagas/create-user.saga';
-import { EntityManager } from '@mikro-orm/core';
+import { CreateObjectDto } from './sagas/create-user/dto/create-user.dto';
+import { CreateUserSaga } from './sagas/create-user/create-user.saga';
+import { EntityManager } from 'src/utils/stubs/entity-manager';
 
 @Injectable()
 export class ContentMutationService {

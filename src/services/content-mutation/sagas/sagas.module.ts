@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { CreateUserSaga } from './create-user.saga';
+import { CreateUserSaga } from './create-user/create-user.saga';
 import { CqrsModule } from '@nestjs/cqrs';
-import { SagaCommandHandlers } from './commands';
+import { SagaCommandHandlers } from '../commands';
 
 const Sagas = [CreateUserSaga];
 @Module({

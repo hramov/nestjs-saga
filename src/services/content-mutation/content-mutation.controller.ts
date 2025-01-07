@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { CreateObjectDto } from './dto/create-user.dto';
+import { CreateObjectDto } from './sagas/create-user/dto/create-user.dto';
 import { ContentMutationService } from './content-mutation.service';
 
 @Controller('content-mutation')
